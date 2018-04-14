@@ -17,5 +17,5 @@ const interfaces = {
 export default interfaces;
 
 // Add classes to window
-if ( typeof window !== "undefined" )
-  Object.assign( window, interfaces );
+if ( typeof self !== "undefined" )
+  Object.assign( self, interfaces );
