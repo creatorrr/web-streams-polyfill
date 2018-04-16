@@ -1,4 +1,4 @@
-const
+export const
   { ReadableStream } = require('./spec/reference-implementation/lib/readable-stream'),
   { WritableStream } = require('./spec/reference-implementation/lib/writable-stream'),
   { ByteLengthQueuingStrategy } = require('./spec/reference-implementation/lib/byte-length-queuing-strategy'),
@@ -29,7 +29,7 @@ function getGlobals(){
 function assignInterfaces(globals, interfaces){
   for(let i in interfaces){
     // prefer native implementation if available
-    if(typeof self[i] === 'undefined'){
+    if(typeof globals[i] === 'undefined'){
       globals[i] = interfaces[i];
     }
   }  
