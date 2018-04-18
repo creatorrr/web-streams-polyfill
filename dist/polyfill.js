@@ -55,11 +55,21 @@ function getGlobals() {
 }
 
 function assignInterfaces(globals, interfaces) {
-  for (var i in interfaces) {
+  var _loop = function _loop(i) {
     // prefer native implementation if available
     if (typeof globals[i] === 'undefined') {
       globals[i] = interfaces[i];
+    } else {
+      var _forcePolyfill = function _forcePolyfill() {
+        globals[i] = interfaces[i];
+      };
+      globals[i].forcePolyfill = _forcePolyfill;
+      globals[i].prototype.forcePolyfill = _forcePolyfill;
     }
+  };
+
+  for (var i in interfaces) {
+    _loop(i);
   }
 }
 
