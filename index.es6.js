@@ -31,8 +31,14 @@ function assignInterfaces(globals, interfaces){
     // prefer native implementation if available
     if(typeof globals[i] === 'undefined'){
       globals[i] = interfaces[i];
+    }else{
+      let _forcePolyfill = function(){
+        globals[i] = interfaces[i];
+      }
+      globals[i].forcePolyfill = _forcePolyfill;
+      globals[i].prototype.forcePolyfill = _forcePolyfill;
     }
-  }  
+  }
 }
 
 const globals = getGlobals();
