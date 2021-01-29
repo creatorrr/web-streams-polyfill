@@ -3,7 +3,7 @@ export const
   { WritableStream } = require('./spec/reference-implementation/lib/writable-stream'),
   ByteLengthQueuingStrategy = require('./spec/reference-implementation/lib/byte-length-queuing-strategy'),
   CountQueuingStrategy = require('./spec/reference-implementation/lib/count-queuing-strategy'),
-  TransformStream = require('./spec/reference-implementation/lib/transform-stream').TransformStream;
+  { TransformStream } = require('./spec/reference-implementation/lib/transform-stream');
 
 const interfaces = {
   ReadableStream,
@@ -18,4 +18,4 @@ export default interfaces;
 
 // Add classes to window
 if ( typeof window !== "undefined" )
-  Object.assign( window, interfaces );
+    Object.assign(window, ...Object.keys(interfaces).filter(k => !(k in window)).map(k => ({[k]: interfaces[k]})));
